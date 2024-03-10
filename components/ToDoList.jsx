@@ -14,7 +14,7 @@ function ToDoList({tasks}) {
       <ScrollView>
         <Pressable>
           {tasks.map((task, index) => (
-            <View style={[styles.task]}>
+            <View style={[styles.task]} key={index}>
               <Text key={index} style={styles.taskText}>
                 {task}
               </Text>
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   },
   taskText: {
     fontSize: 16,
+    paddingLeft: 10,
   },
 });
 

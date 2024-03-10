@@ -1,11 +1,34 @@
 import React from 'react';
 import {StyleSheet, View, TextInput, Button} from 'react-native';
+import { useState } from 'react';
 
-function ToDoForm() {
+function ToDoForm({addTask, tasks }) {
+  const [taskText, setTaskText] = useState('');
+
+  const handleChangeText = (text) => {
+    setTaskText(text);
+  }
+
+  const handlePress = () => {
+    if (tasks.includes(taskText)) {
+      alert(`"${taskText}" task already exists`);
+      setTaskText('');
+      return;
+    }
+
+    addTask(taskText);
+    setTaskText('');
+  }
+
   return (
     <View style={styles.form}>
-      <TextInput style={styles.input} placeholder="Add a new task..." />
-      <Button title="Add" />
+      <TextInput 
+        style={styles.input} 
+        placeholder="Add a new task..." 
+        onChangeText={handleChangeText} 
+        value={taskText}
+      />
+      <Button title="Add" onPress={handlePress}/>
     </View>
   );
 }
